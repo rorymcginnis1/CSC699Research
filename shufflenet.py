@@ -72,11 +72,7 @@ for i in range (len(conv_image)):
         predictions.append(1)
     else:
         predictions.append(0)
-
-    strin="img"
-    strin+=""+str(i)+""
-    strin+=".jpg"
-
+            
     for idx in indices[0]:
         per.append(percentage[idx].item())
     totPercent=[]
