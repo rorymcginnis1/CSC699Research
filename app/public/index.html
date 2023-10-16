@@ -25,10 +25,38 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel = "stylesheet" type = "text/css"  href = "/webPage.css">
+
   </head>
+  
+  <main>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+
+
+    
+    <header>
+      <center>
+      <h1 style="color: white">
+      Data</h1>
+    </center>
+
+
+
+
+  <nav>
+      <ul>
+
+
+
+
+          
+          
+          
+      </ul>
+
+  </nav>
+  </header>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -39,5 +67,30 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    
+  
+ 
+    <div class="chart-container">
+      <svg id="pie-chart-container" width="600" height="600"></svg>
+      <svg id="pie-chart-containers" width="600" height="600"></svg>
+    </div>
+    <center>
+    <div class="bar">
+      
+      <svg id ="bar-chart-container" width="600" height="500"></svg>
+      <svg id ="bar-chart-container1" width="600" height="500"></svg>
+    </div>
+  </center>
+
+
+
+    <script src = "/webPage.js"></script>
+    
   </body>
+</main>
+  <footer class="site-footer">
+
+
+    Rory McGinnis &copy; 2023
+  </footer>
 </html>
