@@ -1,12 +1,14 @@
 import * as d3 from 'd3';
 import AxisVertical from './AxisVertical';
 
-const MARGIN = { top: 60, right: 40, bottom: 30, left: 40 };
+const MARGIN = { top: 60, right: 40, bottom: 30, left: 250 };
 
-const ParallelCoordinatePlot = ({data, width, height, VARIABLES}) => {
+const ParallelCoordinatePlot = ({data, width, height, FROM_VARIABLES, TO_VARIABLES}) => {
   const boundsWidth = width - MARGIN.right - MARGIN.left;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
-  const variables = Array.from({length: VARIABLES}, (_, index) => index); //Creates an array from 0 to VARIABLES
+  // const variables = Array.from({length: VARIABLES}, (_, index) => index); //Creates an array from 0 to VARIABLES
+  const v = Array.from({length: TO_VARIABLES}, (_, index) => index);
+  const variables = v.slice(FROM_VARIABLES, TO_VARIABLES + 1);
 
   // Compute a xScale: spread all Y axis along the chart width
   const xScale = d3

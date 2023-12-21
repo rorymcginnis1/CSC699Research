@@ -36,7 +36,7 @@ def generate_alex_net(data, truth):
     true= json.loads(truth_file.read())
     class_file = open('classes.json',"r")
     classes= json.loads(class_file.read())[0]
-        
+
 #alexnet, mobilenet_v3_small shufflenet_v2_x1_0 squeezenet1_0 mnasnet0_5 squeezenet1_1
 
     CNN = models.alexnet(pretrained=True)
@@ -69,12 +69,12 @@ def generate_alex_net(data, truth):
     total_per=[]
     for i in range (len(conv_image)):
         conv=conv_image[i]
-    
+
         _, indices = torch.sort(conv, descending=True)
         percentage = torch.nn.functional.softmax(conv, dim=1)[0] * 100
         per=[]
-    
-    
+
+
         name = str([(classes[idx]) for idx in indices[0][:1]])
 
         string = ""
@@ -107,7 +107,7 @@ def generate_alex_net(data, truth):
         for l in range(len(per)):
 
             totPercent.append(per[l])
-    
+
     json_data = json.dumps(values)
 
     with open('alexnet.json', 'w') as f:
@@ -142,7 +142,7 @@ def generate_alex_net(data, truth):
             "predicted_label_model_Alexnet": f" {names[i]}",
             "confidence_model_AlexNet_result": preds[i]/100,
             "Alex_Net_accuracy":accuracy,
-        
+
         }
 
 
@@ -167,12 +167,12 @@ def generate_alex_net(data, truth):
     for class_idx in range(1000):
         class_name = classes[class_idx]
         class_filename = os.path.join(output_dir, f"class_{class_name}.json")
-    
+
 
         class_data = []
 
         for i in range(len(total_per)):
-            image_name = f"img{i}.jpg"  
+            image_name = f"img{i}.jpg"
             accuracy = total_per[i][class_idx]
             maxi= preds[i]
 
@@ -181,12 +181,12 @@ def generate_alex_net(data, truth):
                 "image_name": image_name,
                 "accuracy": accuracy,
                 "max": maxi
-            
+
             }
-        
+
 
             class_data.append(image_entry)
-    
+
 
         with open(class_filename, "w") as json_file:
             json.dump(class_data, json_file, indent=4)
@@ -208,7 +208,7 @@ def generate_mobile_net(data, truth):
     true= json.loads(truth_file.read())
     class_file = open('classes.json',"r")
     classes= json.loads(class_file.read())[0]
-        
+
 #alexnet, mobilenet_v3_small shufflenet_v2_x1_0 squeezenet1_0 mnasnet0_5 squeezenet1_1
 
     CNN = models.mobilenet_v3_small(pretrained=True)
@@ -241,12 +241,12 @@ def generate_mobile_net(data, truth):
     total_per=[]
     for i in range (len(conv_image)):
         conv=conv_image[i]
-    
+
         _, indices = torch.sort(conv, descending=True)
         percentage = torch.nn.functional.softmax(conv, dim=1)[0] * 100
         per=[]
-    
-    
+
+
         name = str([(classes[idx]) for idx in indices[0][:1]])
 
         string = ""
@@ -279,7 +279,7 @@ def generate_mobile_net(data, truth):
         for l in range(len(per)):
 
             totPercent.append(per[l])
-    
+
     json_data = json.dumps(values)
 
     with open('mobilenet.json', 'w') as f:
@@ -314,7 +314,7 @@ def generate_mobile_net(data, truth):
             "predicted_label_model_Mobilenet": f" {names[i]}",
             "confidence_model_MobileNet_result": preds[i]/100,
             "Mobile_Net_accuracy":accuracy,
-        
+
         }
 
 
@@ -339,19 +339,19 @@ def generate_mobile_net(data, truth):
     for class_idx in range(1000):
         class_name = classes[class_idx]
         class_filename = os.path.join(output_dir, f"class_{class_name}.json")
-    
+
 
         class_data = []
 
         for i in range(len(total_per)):
-            image_name = f"img{i}.jpg"  
+            image_name = f"img{i}.jpg"
             accuracy = total_per[i][class_idx]
 
             image_entry = {
             "image_name": image_name,
             "accuracy": accuracy
         }
-        
+
             print(image_name)
             print(accuracy)
 
@@ -387,21 +387,23 @@ def run_mobile():
 @app.route('/fetchAlex')
 def fetch_alex():
     model = request.args.get('model', default='alexnet', type=str)
-    filename = "Alex_Net_values.json"
-    
+    # filename = "Alex_Net_values.json"
+    filename = './image_json_files_alex/img7.json'
+
     try:
         with open(filename, 'r') as json_file:
             data = json.load(json_file)
         return jsonify(data)
     except FileNotFoundError:
-        
+
         return jsonify({"error": "File not found"}), 404
 
 @app.route('/fetchMobile')
 def fetch_mobile():
     model = request.args.get('model', default='mobilenet', type=str)
-    filename = "Mobile_Net_values.json"
-    
+    # filename = "Mobile_Net_values.json"
+    filename = './image_json_files_mobile/img7.json'
+
     try:
         with open(filename, 'r') as json_file:
             data = json.load(json_file)

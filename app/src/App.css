@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+/* for the left panel div */
+.LeftPanel{
+  position: absolute;
+  left: auto;
+  height: 400px;
+  width: 250px;
+  border: 1px solid black;
+  margin: 2em auto;
+  margin-left: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.ModelSelect{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.FromRange{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.ToRange{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
